@@ -55,7 +55,7 @@ void led_2_task(void *p) {
 
   while (true) {
 
-    if (xSemaphoreTake(xSemaphore_r, pdMS_TO_TICKS(500)) == pdTRUE) {
+    if (xSemaphoreTake(xSemaphore_g, pdMS_TO_TICKS(500)) == pdTRUE) {
       gpio_put(LED_PIN_G, 1);
       vTaskDelay(pdMS_TO_TICKS(delay));
       gpio_put(LED_PIN_G, 0);
@@ -88,8 +88,8 @@ int main() {
   
   xTaskCreate(led_1_task, "LED_Task 1", 256, NULL, 1, NULL);
   xTaskCreate(btn_1_task, "BTN_Task 1", 256, NULL, 1, NULL);
-  xTaskCreate(led_1_task, "LED_Task 2", 256, NULL, 1, NULL);
-  xTaskCreate(btn_1_task, "BTN_Task 2", 256, NULL, 1, NULL);
+  xTaskCreate(led_2_task, "LED_Task 2", 256, NULL, 1, NULL);
+  xTaskCreate(btn_2_task, "BTN_Task 2", 256, NULL, 1, NULL);
 
   vTaskStartScheduler();
 
